@@ -1,4 +1,3 @@
-import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
@@ -17,6 +16,12 @@ import { AppTopBarComponent } from './app.topbar.component';
 import { CoreModule } from './core/core.module';
 
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import {ToastModule} from 'primeng/toast';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+
+import { ConfirmationService } from 'primeng/primeng';
+
+
 
 @NgModule({
     imports: [
@@ -27,9 +32,12 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
         BrowserAnimationsModule,
 
         ScrollPanelModule,
+        ToastModule,
+        ConfirmDialogModule,
 
         CoreModule,
-        RouterModule
+        RouterModule,
+
     ],
     declarations: [
         AppComponent,
@@ -40,6 +48,7 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
         AppFooterComponent,
     ],
     providers: [
+        ConfirmationService,
         {provide: LocationStrategy, useClass: PathLocationStrategy},
     ],
     bootstrap: [AppComponent]

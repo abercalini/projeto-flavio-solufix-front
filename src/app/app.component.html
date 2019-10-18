@@ -20,3 +20,13 @@
     </div>
 
 </div>
+
+<p-toast></p-toast>
+
+<p-confirmDialog #cd header="Confirmação" icon="pi pi-exclamation-triangle">
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" label="Sim" (click)="cd.accept()"></button>
+        <button type="button" pButton icon="pi pi-times" label="Não" (click)="cd.reject()"></button>
+    </p-footer>
+</p-confirmDialog>
+

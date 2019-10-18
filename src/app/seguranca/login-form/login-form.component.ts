@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
 
+  }
+
+  logarNoSistema(email, senha) {
+    this.auth.logar(email, senha).subscribe(() => {
+      this.router.navigate(['/categoria/novo']);
+    });
   }
 
 }
