@@ -26,7 +26,7 @@ export class CategoriaCadastroComponent implements OnInit {
     private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
-    this.title.setTitle('Categorias');
+    this.title.setTitle('SOLUFIX - Categorias');
   }
 
   salvar(form: FormControl) {
@@ -34,6 +34,7 @@ export class CategoriaCadastroComponent implements OnInit {
       this.messageService.add({severity: 'success', summary: 'Adicionado com sucesso', detail: 'Adicionado com sucesso'});
       form.reset();
       this.categoria = new Categoria();
+      this.pesquisar();
     });
   }
 

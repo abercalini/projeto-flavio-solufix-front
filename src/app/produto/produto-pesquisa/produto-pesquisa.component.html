@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="ui-g">
+
+    <div class="ui-g-12 ui-fluid">
+      <h1 style="color: red; text-align: center;">Lista de Produtos</h1>
+    </div>
+
+    <div class="ui-g-12 ui-md-8 ui-fluid">
+        <input type="text" pInputText name="pesquisa" placeholder="Pesquise por (Nome, Descrição ou por Codigo de barra)"
+          [(ngModel)]="produtoFilter.filtroProduto"/>
+    </div>
+    <div class="ui-g-12 ui-md-4 ui-fluid">
+        <button pButton type="submit" label="Pesquisar" style="background-color: red;" icon="ui-icon-search"
+          (click)="listarProdutos()"></button>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+        <p-table [value]="produtos" [responsive]="true" [lazy]="true" (onLazyLoad)="aoMudarPagina($event)"
+          [paginator]="true" [rows]="produtoFilter.totalItensPorPagina" [totalRecords]="totalRegistro" #tabela>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 80px;">Codigo</th>
+                    <th>Nome</th>
+                    <th>Descricao</th>
+                    <th style="width: 100px;">Valor</th>
+                    <th>Categoria</th>
+                    <th style="width: 100px;">Opções</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-produto>
+                <tr>
+                    <td>{{produto.codigo}}</td>
+                    <td>{{produto.nome}}</td>
+                    <td>{{produto.descricao}}</td>
+                    <td>{{produto.valor | number: '1.2-2'}}</td>
+                    <td>{{produto.categoria.descricao}}</td>
+                    <td style="text-align: center;">
+                        <button pButton type="button" style="background-color: green;" icon="pi pi-pencil"
+                          pTooltip="Editar" tooltipPosition="top" [routerLink]="['/produto', produto.codigo]"></button>
+                          <button pButton type="button" style="background-color: red;" icon="pi pi-trash"
+                          pTooltip="Excluir" tooltipPosition="top" (click)="prepararExclusao(produto)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <div class="ui-g-12 ui-md-4 ui-fluid">
+        <button pButton type="button" label="Adicionar Produto" routerLink="/produto/novo"></button>
+    </div>
+
+  </div>
+</div>

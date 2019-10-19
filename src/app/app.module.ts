@@ -1,5 +1,5 @@
 import { RouterModule } from '@angular/router';
-import {NgModule} from '@angular/core';
+import {NgModule, LOCALE_ID} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
@@ -21,7 +21,9 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 import { ConfirmationService } from 'primeng/primeng';
 
-
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
 
 @NgModule({
     imports: [
@@ -50,6 +52,7 @@ import { ConfirmationService } from 'primeng/primeng';
     providers: [
         ConfirmationService,
         {provide: LocationStrategy, useClass: PathLocationStrategy},
+        { provide: LOCALE_ID, useValue: 'pt-BR' }
     ],
     bootstrap: [AppComponent]
 })

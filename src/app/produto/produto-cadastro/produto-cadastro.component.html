@@ -1,0 +1,55 @@
+<div class="container">
+  <form #p="ngForm" (ngSubmit)="verificarSalvarOuEditar(p)">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1 style="color: red; text-align: center;">{{isEditando() ? 'Edição de Produto' : 'Cadastro de Produto'}}</h1>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+          <label>Nome *</label>
+          <input type="text" pInputText name="nome" [(ngModel)]="produto.nome" required>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Descrição</label>
+        <input type="text" pInputText name="descricao" [(ngModel)]="produto.descricao"/>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Cod de barra *</label>
+        <input type="text" pInputText name="codigoBarra" [(ngModel)]="produto.codigoBarra" required/>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Observação</label>
+        <input type="text" pInputText name="observacao" [(ngModel)]="produto.observacao"/>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+          <label>Valor</label>
+          <input currencyMask [(ngModel)]="produto.valor" pInputText name="valor"
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"/>
+      </div>
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>Quantidade</label>
+        <input type="text" pInputText name="quantidade" [(ngModel)]="produto.estoque.quantidade"/>
+      </div>
+      <div class="ui-g-12 ui-md-8 ui-fluid">
+        <label>Categoria *</label>
+        <p-dropdown [options]="categorias" [(ngModel)]="produto.categoria.codigo"
+          name="categoria" [filter]="true" placeholder="Selecione..." required></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+          <button pButton type="submit" label="Salvar" style="background-color: green;"
+            icon="ui-icon-save" [disabled]="!p.valid"></button>
+      </div>
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+          <button pButton type="reset" label="Novo" icon="ui-icon-refresh"></button>
+      </div>
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <a routerLink="/produto">Pesquisar Produto</a>
+      </div>
+
+    </div>
+  </form>
+</div>

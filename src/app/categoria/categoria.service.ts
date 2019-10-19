@@ -42,4 +42,10 @@ export class CategoriaService {
     return this.httpClient.delete(`${this.baseUrl}/${codigo}`).map(() => null);
   }
 
+  carregarCategorias(): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}`).map(response => {
+      return response.content;
+    });
+  }
+
 }
