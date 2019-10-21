@@ -19,7 +19,8 @@ export class CategoriaService {
   salvar(categoria: Categoria): Observable<Categoria> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.post<Categoria>(`${this.baseUrl}`, JSON.stringify(categoria), {headers}).map(response => response);
+    return this.httpClient.post<Categoria>(`https://solufix.herokuapp.com/categorias`,
+      JSON.stringify(categoria), {headers}).map(response => response);
   }
 
   editar(categoria: Categoria): Observable<Categoria> {
