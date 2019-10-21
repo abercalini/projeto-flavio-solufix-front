@@ -21,14 +21,14 @@ export class ProdutoService {
   salvar(produto: Produto): Observable<Produto> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.post<Produto>(`${this.baseUrl}`, JSON.stringify(produto),
+    return this.httpClient.post<Produto>(`https://solufix.herokuapp.com/produtos`, JSON.stringify(produto),
       {headers}).map(response => response);
   }
 
   editar(produto: Produto): Observable<Produto> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.put<Produto>(`${this.baseUrl}/${produto.codigo}`, JSON.stringify(produto), {headers})
+    return this.httpClient.put<Produto>(`https://solufix.herokuapp.com/produtos/${produto.codigo}`, JSON.stringify(produto), {headers})
       .map(response => response);
   }
 
@@ -45,7 +45,7 @@ export class ProdutoService {
       params = params.append('codigoBarra', produtoFilter.filtroProduto);
     }
 
-    return this.httpClient.get<any>(`${this.baseUrl}`, {params}).map(response => {
+    return this.httpClient.get<any>(`https://solufix.herokuapp.com/produtos`, {params}).map(response => {
       const resultado = {
         produtos: response.content,
         total: response.totalElements
@@ -55,11 +55,11 @@ export class ProdutoService {
   }
 
   buscarPorCodigo(codigo: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.baseUrl}/${codigo}`).map(response => response);
+    return this.httpClient.get<any>(`https://solufix.herokuapp.com/produtos/${codigo}`).map(response => response);
   }
 
   excluir(codigo: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}/${codigo}`).map(() => null);
+    return this.httpClient.delete(`https://solufix.herokuapp.com/produtos/${codigo}`).map(() => null);
   }
 
 }

@@ -77,7 +77,7 @@ export class AuthService {
   }
 
   logOut(): Observable<any> {
-    return this.httpClient.delete<any>(`${this.urlBaseLogOut}`, {withCredentials: true}).map(()  => {
+    return this.httpClient.delete<any>(`https://solufix.herokuapp.com/categorias/token/revoke`, {withCredentials: true}).map(()  => {
       this.limparAccessToken();
       this.router.navigate(['/login']);
     });
