@@ -21,6 +21,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           let errorMessage = '';
           console.log(error);
 
+          if (error.error.error === 'Internal Server Error' &&
+            error.error.message.inclues('could not execute statement; SQL [n/a]; constraint [null]') &&
+            error.status === 500) {
+              errorMessage = 'Esse registro já esta sendo movimentada por outra tabela';
+              this.messageService.add({severity: 'error', summary: errorMessage, detail: errorMessage});
+          }
+
           if (error.error.error === 'invalid_token' && error.error.error_description.includes('Access token expired:')) {
             errorMessage = 'Atualizar a pagina por favor';
             this.auth.obterNovoAccessToken().subscribe(() => null);
