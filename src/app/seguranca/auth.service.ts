@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';

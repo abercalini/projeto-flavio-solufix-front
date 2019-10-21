@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Produto } from './produto';
 
-import { environment } from './../../environments/environment';
+import { environment } from 'src/environments/environment';
+
 
 
 @Injectable({
