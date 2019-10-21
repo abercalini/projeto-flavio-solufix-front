@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://solufix.herokuapp.com'
+  apiUrl: 'https://solufix-angular.herokuapp.com'
 };
 
