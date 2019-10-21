@@ -21,7 +21,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        whitelistedDomains: ['localhost:8080', 'https://solufix.herokuapp.com/', 'https://solufix.herokuapp.com/categorias'],
+        whitelistedDomains: ['localhost:8080', 'https://solufix.herokuapp.com/', 'solufix.herokuapp.com'],
         blacklistedRoutes: ['http://localhost:8080/oauth/token', 'https://solufix.herokuapp.com/oauth/token']
       }
     })
