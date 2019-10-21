@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -10,8 +11,10 @@ import { CategoriaFilter } from './categoriaFilter';
 export class CategoriaService {
 
 
-  baseUrl = 'http://localhost:8080/categorias';
-  constructor(private httpClient: HttpClient) { }
+  baseUrl: string;
+  constructor(private httpClient: HttpClient) {
+    this.baseUrl = `${environment.apiUrl}/categorias`;
+  }
 
   salvar(categoria: Categoria): Observable<Categoria> {
     let headers = new HttpHeaders();

@@ -15,6 +15,7 @@
         </div>
         <div class="ui-g-12 ui-md-2 ui-fluid">
             <button pButton type="button" label="Salvar" icon="ui-icon-save"
+              *ngIf="temPermissao('ROLE_CADASTRAR_CATEGORIA')"
               style="background-color: green;" [disabled]="!f.valid" (click)="salvar(f)"></button>
         </div>
         <br>
@@ -60,9 +61,9 @@
                           </td>
                       <td style="text-align: center;">
                           <button pButton type="button" label="Editar" style="background-color: green;" icon="ui-icon-edit"
-                            (click)="atualizarCategoria(categoria)"></button>
+                            (click)="atualizarCategoria(categoria)" *ngIf="temPermissao('ROLE_CADASTRAR_CATEGORIA')"></button>
                           <button pButton type="button" label="Excluir" style="background-color: red;" icon="pi pi-trash"
-                            (click)="prepararExclusao(categoria)"></button>
+                            (click)="prepararExclusao(categoria)" *ngIf="temPermissao('ROLE_REMOVER_CATEGORIA')"></button>
                       </td>
                   </tr>
               </ng-template>

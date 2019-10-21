@@ -36,9 +36,11 @@
                     <td>{{produto.categoria.descricao}}</td>
                     <td style="text-align: center;">
                         <button pButton type="button" style="background-color: green;" icon="pi pi-pencil"
-                          pTooltip="Editar" tooltipPosition="top" [routerLink]="['/produto', produto.codigo]"></button>
+                          pTooltip="Editar" tooltipPosition="top" [routerLink]="['/produto', produto.codigo]"
+                          *ngIf="temPermissao('ROLE_CADASTRAR_PRODUTO')"></button>
                           <button pButton type="button" style="background-color: red;" icon="pi pi-trash"
-                          pTooltip="Excluir" tooltipPosition="top" (click)="prepararExclusao(produto)"></button>
+                          pTooltip="Excluir" tooltipPosition="top" (click)="prepararExclusao(produto)"
+                          *ngIf="temPermissao('ROLE_REMOVER_PRODUTO')"></button>
                     </td>
                 </tr>
             </ng-template>
@@ -46,7 +48,8 @@
     </div>
 
     <div class="ui-g-12 ui-md-4 ui-fluid">
-        <button pButton type="button" label="Adicionar Produto" routerLink="/produto/novo"></button>
+        <button pButton type="button" label="Adicionar Produto" routerLink="/produto/novo"
+        *ngIf="temPermissao('ROLE_CADASTRAR_PRODUTO')"></button>
     </div>
 
   </div>

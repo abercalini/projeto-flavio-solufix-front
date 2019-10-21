@@ -1,3 +1,5 @@
+import { AuthService } from './seguranca/auth.service';
+import { routes } from './app.routes';
 import {Component, Input, OnInit, AfterViewInit, OnDestroy, ElementRef, Renderer, ViewChild} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import {Location} from '@angular/common';
@@ -17,10 +19,19 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
     @ViewChild('scrollPanel', {static: false}) layoutMenuScrollerViewChild: ScrollPanel;
 
-    constructor(public app: AppComponent) {}
+    constructor(public app: AppComponent, private router: Router, private auth: AuthService) {}
 
     ngAfterViewInit() {
       setTimeout(() => {this.layoutMenuScrollerViewChild.moveBar(); }, 100);
+    }
+
+    exibirMenu() {
+      if (this.router.url === '/login' || this.router.url === '/nao-autorizado'
+        || this.router.url === '/pagina-nao-encontrada') {
+        return false;
+      } else {
+        return true;
+      }
     }
 
     ngOnInit() {
@@ -110,6 +121,13 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
                     }
                 ]
             },
+            {label: 'Cadastro', icon: 'toc', items: [
+              {label: 'Categoria', routerLink: ['categoria/novo']},
+              {label: 'Produto', routerLink: ['produto']}
+            ]},
+            {label: 'LogOut', icon: 'exit_to_app', command: () => {
+              this.auth.logOut().subscribe(() => null);
+            }}
         ];
     }
 

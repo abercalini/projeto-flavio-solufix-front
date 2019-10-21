@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { CategoriaService } from './../categoria.service';
 import { Categoria } from './../categoria';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -23,13 +24,18 @@ export class CategoriaCadastroComponent implements OnInit {
     private title: Title,
     private categoriaService: CategoriaService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService,
+    private auth: AuthService) { }
 
   ngOnInit() {
     this.title.setTitle('SOLUFIX - Categorias');
   }
 
-  salvar(form: FormControl) {
+  temPermissao(permissao: string) {
+    return this.auth.temPermissao(permissao);
+  }
+
+  salvar(form: any) {
     this.categoriaService.salvar(this.categoria).subscribe(response => {
       this.messageService.add({severity: 'success', summary: 'Adicionado com sucesso', detail: 'Adicionado com sucesso'});
       form.reset();

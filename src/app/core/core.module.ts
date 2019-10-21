@@ -1,3 +1,4 @@
+import { GuardGuard } from './../seguranca/guard.guard';
 import { ProdutoService } from './../produto/produto.service';
 import { CategoriaService } from './../categoria/categoria.service';
 import { HttpErrorInterceptor } from './../seguranca/httpErrorInterceptor ';
@@ -13,12 +14,13 @@ import { ProdutoModule } from './../produto/produto.module';
 
 import { MessageService } from 'primeng/primeng';
 import { Title } from '@angular/platform-browser';
+import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
 
 
 @NgModule({
   declarations: [
 
-  ],
+  NaoAutorizadoComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -33,6 +35,7 @@ import { Title } from '@angular/platform-browser';
     CategoriaService,
     ProdutoService,
     Title,
+    GuardGuard,
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
   ]
 })

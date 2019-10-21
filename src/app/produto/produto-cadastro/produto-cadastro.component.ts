@@ -42,7 +42,7 @@ export class ProdutoCadastroComponent implements OnInit {
     });
   }
 
-  salvar(form: FormControl) {
+  salvar(form: any) {
     this.produtoService.salvar(this.produto).subscribe(response => {
       this.messageService.add({severity: 'success', summary: 'Salvo com sucesso', detail: 'Salvo com sucesso'});
       form.reset();
@@ -50,7 +50,7 @@ export class ProdutoCadastroComponent implements OnInit {
     });
   }
 
-  verificarSalvarOuEditar(form: FormControl) {
+  verificarSalvarOuEditar(form: any) {
     if (this.isEditando()) {
       this.editar();
     } else {

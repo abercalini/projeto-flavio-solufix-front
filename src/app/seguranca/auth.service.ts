@@ -1,3 +1,5 @@
+import { environment } from './../../environments/environment';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -14,9 +16,12 @@ export class AuthService {
 
   helper = new JwtHelperService();
   tokenPayload: any;
-  urlBase = 'http://localhost:8080/oauth/token';
+  urlBase: string;
+  urlBaseLogOut: string;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
+    this.urlBase = `${environment.apiUrl}/oauth/token`;
+    this.urlBaseLogOut = `${environment.apiUrl}/token/revoke`;
     this.carregarToken();
   }
 
@@ -60,6 +65,27 @@ export class AuthService {
       console.log(response);
       this.armazenarToken(response.access_token);
     });
+  }
+
+  temQualquerPermissao(roles) {
+    for (const r of roles) {
+      if (this.temPermissao(r)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  logOut(): Observable<any> {
+    return this.httpClient.delete<any>(`${this.urlBaseLogOut}`, {withCredentials: true}).map(()  => {
+      this.limparAccessToken();
+      this.router.navigate(['/login']);
+    });
+  }
+
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.tokenPayload = null;
   }
 
 }

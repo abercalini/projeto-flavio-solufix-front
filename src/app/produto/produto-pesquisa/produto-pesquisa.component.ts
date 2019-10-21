@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { ProdutoFilter } from './../produtoFilter';
 import { ProdutoService } from './../produto.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -23,10 +24,15 @@ export class ProdutoPesquisaComponent implements OnInit {
     private produtoService: ProdutoService,
     private title: Title,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private auth: AuthService) { }
 
   ngOnInit() {
     this.title.setTitle('SOLUFIX - Lista de produtos');
+  }
+
+  temPermissao(permissao: string) {
+    return this.auth.temPermissao(permissao);
   }
 
   listarProdutos(pagina = 0) {

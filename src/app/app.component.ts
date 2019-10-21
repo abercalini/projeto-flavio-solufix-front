@@ -43,6 +43,8 @@ export class AppComponent implements OnDestroy, OnInit {
       this.zone.runOutsideAngular(() => {this.bindRipple(); });
     }
 
+
+
     bindRipple() {
         this.rippleInitListener = this.init.bind(this);
         document.addEventListener('DOMContentLoaded', this.rippleInitListener);

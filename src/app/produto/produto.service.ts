@@ -4,14 +4,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Produto } from './produto';
 
+import { environment } from './../../environments/environment';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutoService {
 
-  baseUrl = 'http://localhost:8080/produtos';
+  baseUrl: string;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this.baseUrl = `${environment.apiUrl}/produtos`;
+   }
 
   salvar(produto: Produto): Observable<Produto> {
     let headers = new HttpHeaders();
