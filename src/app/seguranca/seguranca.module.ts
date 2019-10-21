@@ -22,7 +22,7 @@ export function tokenGetter() {
       config: {
         tokenGetter,
         whitelistedDomains: ['localhost:8080', 'https://solufix-angular.herokuapp.com',
-          'https://solufix-angular.herokuapp.com/categoria/novo', 'https://solufix-angular.herokuapp.com/categoria'],
+          'https://solufix-angular.herokuapp.com/categoria/novo', 'https://solufix-angular.herokuapp.com/categorias'],
         blacklistedRoutes: ['http://localhost:8080/oauth/token', 'https://solufix-angular.herokuapp.com/oauth/token']
       }
     })
