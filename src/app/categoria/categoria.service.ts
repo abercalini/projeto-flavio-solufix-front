@@ -19,7 +19,7 @@ export class CategoriaService {
   salvar(categoria: Categoria): Observable<Categoria> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.post<Categoria>(`${this.baseUrl}`,
+    return this.httpClient.post<Categoria>(`https://solufix.herokuapp.com/categorias`,
       JSON.stringify(categoria), {headers}).map(response => response);
   }
 
@@ -27,7 +27,7 @@ export class CategoriaService {
   editar(categoria: Categoria): Observable<Categoria> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.put<Categoria>(`${this.baseUrl}/${categoria.codigo}`,
+    return this.httpClient.put<Categoria>(`https://solufix.herokuapp.com/categorias/${categoria.codigo}`,
       JSON.stringify(categoria), {headers}).map(response => response);
   }
 
@@ -41,17 +41,17 @@ export class CategoriaService {
     if (categoriaFilter.descricao) {
       params = params.append('descricao', categoriaFilter.descricao);
     }
-    return this.httpClient.get<any>(`${this.baseUrl}`, {params}).map(response => response);
+    return this.httpClient.get<any>(`https://solufix.herokuapp.com/categorias`, {params}).map(response => response);
   }
 
   // https://solufix.herokuapp.com/categorias/
   excluir(codigo: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}/${codigo}`).map(() => null);
+    return this.httpClient.delete(`https://solufix.herokuapp.com/categorias/${codigo}`).map(() => null);
   }
 
   // https://solufix.herokuapp.com/categorias
   carregarCategorias(): Observable<any> {
-    return this.httpClient.get<any>(`${this.baseUrl}`).map(response => {
+    return this.httpClient.get<any>(`https://solufix.herokuapp.com/categorias`).map(response => {
       return response.content;
     });
   }
