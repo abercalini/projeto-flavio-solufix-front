@@ -24,19 +24,19 @@ export class ProdutoService {
   salvar(produto: Produto): Observable<Produto> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.post<Produto>('https://solufix.herokuapp.com/produtos',
+    return this.httpClient.post<Produto>('https://solufix-api.herokuapp.com/produtos',
       JSON.stringify(produto), {headers}).map(response => response);
   }
 
   upload(formData: any): Observable<any> {
-    return this.httpClient.post<any>('https://solufix.herokuapp.com/produtos/upload', formData);
+    return this.httpClient.post<any>('https://solufix-api.herokuapp.com/produtos/upload', formData);
   }
 
   // https://solufix.herokuapp.com/produtos
   editar(produto: Produto): Observable<Produto> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.put<Produto>(`https://solufix.herokuapp.com/produtos/${produto.codigo}`, JSON.stringify(produto), {headers})
+    return this.httpClient.put<Produto>(`https://solufix-api.herokuapp.com/produtos/${produto.codigo}`, JSON.stringify(produto), {headers})
       .map(response => response);
   }
 
@@ -53,7 +53,7 @@ export class ProdutoService {
       params = params.append('codigoBarra', produtoFilter.filtroProduto);
     }
     // https://solufix.herokuapp.com/produtos
-    return this.httpClient.get<any>('https://solufix.herokuapp.com/produtos', {params}).map(response => {
+    return this.httpClient.get<any>('https://solufix-api.herokuapp.com/produtos', {params}).map(response => {
       const resultado = {
         produtos: response.content,
         total: response.totalElements
@@ -63,11 +63,11 @@ export class ProdutoService {
   }
   // https://solufix.herokuapp.com/produtos
   buscarPorCodigo(codigo: number): Observable<any> {
-    return this.httpClient.get<any>(`https://solufix.herokuapp.com/produtos/${codigo}`).map(response => response);
+    return this.httpClient.get<any>(`https://solufix-api.herokuapp.com/produtos/${codigo}`).map(response => response);
   }
   // https://solufix.herokuapp.com/produtos
   excluir(codigo: number): Observable<any> {
-    return this.httpClient.delete(`https://solufix.herokuapp.com/produtos/${codigo}`).map(() => null);
+    return this.httpClient.delete(`https://solufix-api.herokuapp.com/produtos/${codigo}`).map(() => null);
   }
 
 }
