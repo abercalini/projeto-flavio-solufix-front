@@ -19,16 +19,17 @@ export class ProdutoService {
     this.baseUrl = `${environment.apiUrl}/produtos`;
    }
 
+
   // https://solufix.herokuapp.com/produtos
   salvar(produto: Produto): Observable<Produto> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.post<Produto>(`https://solufix.herokuapp.com/produtos`,
+    return this.httpClient.post<Produto>('https://solufix.herokuapp.com/produtos',
       JSON.stringify(produto), {headers}).map(response => response);
   }
 
   upload(formData: any): Observable<any> {
-    return this.httpClient.post<any>(`https://solufix.herokuapp.com/produtos/upload`, formData);
+    return this.httpClient.post<any>('https://solufix.herokuapp.com/produtos/upload', formData);
   }
 
   // https://solufix.herokuapp.com/produtos
@@ -52,7 +53,7 @@ export class ProdutoService {
       params = params.append('codigoBarra', produtoFilter.filtroProduto);
     }
     // https://solufix.herokuapp.com/produtos
-    return this.httpClient.get<any>(`https://solufix.herokuapp.com/produtos`, {params}).map(response => {
+    return this.httpClient.get<any>('https://solufix.herokuapp.com/produtos', {params}).map(response => {
       const resultado = {
         produtos: response.content,
         total: response.totalElements
