@@ -1,11 +1,14 @@
   <br>
   <br>
-  <form #p="ngForm" (ngSubmit)="verificarSalvarOuEditar(p)">
+  <form #p="ngForm" (ngSubmit)="verificarSalvarOuEditar(p)" enctype="multipart/form-data">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1 style="color: red; text-align: center;">{{isEditando() ? 'Edição de Produto' : 'Cadastro de Produto'}}</h1>
       </div>
-
+      <div class="ui-g-12 ui-m-12 ui-fluid">
+        <label>Foto *</label>
+        <input type="file" (change)="inputFileSelectd($event)">
+      </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
           <label>Nome *</label>
           <input type="text" pInputText name="nome" [(ngModel)]="produto.nome" required>

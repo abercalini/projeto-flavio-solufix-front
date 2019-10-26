@@ -7,6 +7,7 @@ export class Produto {
   valor: number;
   estoque = new Estoque();
   categoria = new Categoria();
+  caminhoFoto: string;
 }
 
 export class Estoque {

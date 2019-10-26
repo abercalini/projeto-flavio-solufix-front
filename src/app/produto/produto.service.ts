@@ -23,9 +23,14 @@ export class ProdutoService {
   salvar(produto: Produto): Observable<Produto> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.post<Produto>(`https://solufix.herokuapp.com/produtos`, JSON.stringify(produto),
-      {headers}).map(response => response);
+    return this.httpClient.post<Produto>(`https://solufix.herokuapp.com/produtos`,
+      JSON.stringify(produto), {headers}).map(response => response);
   }
+
+  upload(formData: any): Observable<any> {
+    return this.httpClient.post<any>(`https://solufix.herokuapp.com/produtos/upload`, formData);
+  }
+
   // https://solufix.herokuapp.com/produtos
   editar(produto: Produto): Observable<Produto> {
     let headers = new HttpHeaders();

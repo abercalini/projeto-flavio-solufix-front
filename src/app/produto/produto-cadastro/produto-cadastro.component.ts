@@ -42,6 +42,19 @@ export class ProdutoCadastroComponent implements OnInit {
     });
   }
 
+  inputFileSelectd(event) {
+    if (event.target.files || event.target.files[0]) {
+       const arquivo = event.target.files[0];
+
+       console.log(arquivo);
+
+       const formData = new FormData();
+       formData.set('foto', arquivo);
+
+       this.produtoService.upload(formData).subscribe();
+    }
+  }
+
   salvar(form: any) {
     this.produtoService.salvar(this.produto).subscribe(response => {
       this.messageService.add({severity: 'success', summary: 'Salvo com sucesso', detail: 'Salvo com sucesso'});

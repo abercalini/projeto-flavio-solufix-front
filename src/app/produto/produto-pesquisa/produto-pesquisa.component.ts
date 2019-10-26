@@ -38,8 +38,8 @@ export class ProdutoPesquisaComponent implements OnInit {
   listarProdutos(pagina = 0) {
     this.produtoFilter.pagina = pagina;
     this.produtoService.buscarProdutos(this.produtoFilter).subscribe(response => {
-      this.produtos = response.produtos;
       this.totalRegistro = response.total;
+      this.produtos = response.produtos;
     });
   }
 
