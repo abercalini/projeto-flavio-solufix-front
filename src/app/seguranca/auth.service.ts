@@ -33,7 +33,7 @@ export class AuthService {
 
     const body = `username=${email}&password=${senha}&grant_type=password`;
     // https://solufix.herokuapp.com/oauth/token
-    return this.httpClient.post<any>('https://solufix-api.herokuapp.com/oauth/token',
+    return this.httpClient.post<any>('https://solufix-angular.herokuapp.com/oauth/token',
     body, {headers, withCredentials: true}).map(response => {
       this.armazenarToken(response.access_token);
     });
@@ -62,7 +62,7 @@ export class AuthService {
 
     const body = 'grant_type=refresh_token';
     // https://solufix.herokuapp.com/oauth/token
-    return this.httpClient.post<any>('https://solufix-api.herokuapp.com/oauth/token',
+    return this.httpClient.post<any>('https://solufix-angular.herokuapp.com/oauth/token',
       body, {headers, withCredentials: true}).map(response => {
       console.log(response);
       this.armazenarToken(response.access_token);
@@ -80,7 +80,7 @@ export class AuthService {
 
   // `https://solufix.herokuapp.com/token/revoke`
   logOut(): Observable<any> {
-    return this.httpClient.delete<any>('https://solufix-api.herokuapp.com/token/revoke', {withCredentials: true}).map(()  => {
+    return this.httpClient.delete<any>('https://solufix-angular.herokuapp.com/token/revoke', {withCredentials: true}).map(()  => {
       this.limparAccessToken();
       this.router.navigate(['/login']);
     });
