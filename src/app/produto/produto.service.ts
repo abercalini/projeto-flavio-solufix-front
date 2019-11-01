@@ -20,23 +20,24 @@ export class ProdutoService {
    }
 
 
-  // https://solufix.herokuapp.com/produtos
+  // https://solufix-api.herokuapp.com/produtos
   salvar(produto: Produto): Observable<Produto> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.post<Produto>('https://solufix-api.herokuapp.com/produtos',
+    return this.httpClient.post<Produto>(`${this.baseUrl}`,
       JSON.stringify(produto), {headers}).map(response => response);
   }
 
+  // https://solufix-api.herokuapp.com/produtos/upload
   upload(formData: any): Observable<any> {
-    return this.httpClient.post<any>('https://solufix-api.herokuapp.com/produtos/upload', formData);
+    return this.httpClient.post<any>(`${this.baseUrl}/upload`, formData);
   }
 
-  // https://solufix.herokuapp.com/produtos
+  // https://solufix-api.herokuapp.com/produtos/
   editar(produto: Produto): Observable<Produto> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.put<Produto>(`https://solufix-api.herokuapp.com/produtos/${produto.codigo}`, JSON.stringify(produto), {headers})
+    return this.httpClient.put<Produto>(`${this.baseUrl}/${produto.codigo}`, JSON.stringify(produto), {headers})
       .map(response => response);
   }
 
@@ -52,8 +53,8 @@ export class ProdutoService {
       params = params.append('descricao', produtoFilter.filtroProduto);
       params = params.append('codigoBarra', produtoFilter.filtroProduto);
     }
-    // https://solufix.herokuapp.com/produtos
-    return this.httpClient.get<any>('https://solufix-api.herokuapp.com/produtos', {params}).map(response => {
+    // https://solufix-api.herokuapp.com/produtos
+    return this.httpClient.get<any>(`${this.baseUrl}`, {params}).map(response => {
       const resultado = {
         produtos: response.content,
         total: response.totalElements
@@ -61,13 +62,17 @@ export class ProdutoService {
       return resultado;
     });
   }
-  // https://solufix.herokuapp.com/produtos
+  // https://solufix-api.herokuapp.com/produtos/
   buscarPorCodigo(codigo: number): Observable<any> {
-    return this.httpClient.get<any>(`https://solufix-api.herokuapp.com/produtos/${codigo}`).map(response => response);
+    return this.httpClient.get<any>(`${this.baseUrl}/${codigo}`).map(response => response);
   }
-  // https://solufix.herokuapp.com/produtos
+  // https://solufix-api.herokuapp.com/produtos/
   excluir(codigo: number): Observable<any> {
-    return this.httpClient.delete(`https://solufix-api.herokuapp.com/produtos/${codigo}`).map(() => null);
+    return this.httpClient.delete(`${this.baseUrl}/${codigo}`).map(() => null);
+  }
+
+  listarProdutosMenu(): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}/android`).map(response => response);
   }
 
 }

@@ -1,0 +1,58 @@
+<br>
+<br>
+<br>
+<form #f="ngForm" ngSubmit="listarUsuarios()">
+<div class="container">
+  <div class="ui-g-12 ui-md-12 ui-fluid">
+    <h1 style="text-align: center; color: red">Pesquisar Usuário</h1>
+  </div>
+
+  <div class="ui-g-12 ui-md-10 ui-fluid">
+    <label>Pesquisar</label>
+    <input type="text" pInputText [(ngModel)]="usuarioFilter.filtroUsuario" name="usuarioPesquisa"
+      placeholder="Pesquise por nome ou por email do usuário"/>
+  </div>
+  <div class="ui-g-12 ui-md-2 ui-fluid">
+      <label style="color: white;">teste</label>
+      <button pButton type="submit" label="Pesquisar" style="background-color: red;"
+        icon="pi pi-search" (click)="listarUsuarios()"></button>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-fluid">
+    <p-table [value]="usuarios" [paginator]="true" [rows]="usuarioFilter.itensPorPagina"
+      [responsive]="true" [lazy]="true" (onLazyLoad)="aoMudarDePagina($event)" [totalRecords]="totalElemento"
+      #tabela >
+      <ng-template pTemplate="header">
+          <tr>
+              <th style="width: 100px;">Codigo</th>
+              <th style="width: 350px;">Nome</th>
+              <th style="width: 350px;">Email</th>
+              <th>Opções</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-permissao>
+          <tr>
+              <td style="text-align: center;">{{permissao.codigo}}</td>
+              <td>{{permissao.nome}}</td>
+              <td>{{permissao.email}}</td>
+              <td>
+                <div class="ui-g-12 ui-md-6 ui-fluid">
+                    <button pButton type="button" style="background-color: green;" icon="pi pi-pencil"
+                    tooltipPosition="top" label="Editar" [routerLink]="['/usuario-novo/', permissao.codigo]"></button>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-fluid">
+                  <button pButton type="button" style="background-color: red;" icon="pi pi-trash"
+                  label="Excluir" tooltipPosition="top" (click)="excluir(permissao.codigo)"></button>
+                </div>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+  </div>
+
+  <div class="ui-g-12 ui-md-3 ui-fluid">
+      <button pButton type="button" label="Cadastrar Usuário" icon="pi pi-plus" routerLink="/usuario-novo"></button>
+  </div>
+
+</div>
+</form>

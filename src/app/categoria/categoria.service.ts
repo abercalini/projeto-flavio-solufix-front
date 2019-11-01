@@ -15,23 +15,23 @@ export class CategoriaService {
   constructor(private httpClient: HttpClient) {
     this.baseUrl = `${environment.apiUrl}/categorias`;
   }
-  // https://solufix.herokuapp.com/categorias
+  // https://solufix-api.herokuapp.com/categorias
   salvar(categoria: Categoria): Observable<Categoria> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.post<Categoria>(`https://solufix-api.herokuapp.com/categorias`,
+    return this.httpClient.post<Categoria>(`${this.baseUrl}`,
       JSON.stringify(categoria), {headers}).map(response => response);
   }
 
-  // https://solufix.herokuapp.com/categorias
+  // https://solufix-api.herokuapp.com/categorias
   editar(categoria: Categoria): Observable<Categoria> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.put<Categoria>(`https://solufix-api.herokuapp.com/categorias/${categoria.codigo}`,
+    return this.httpClient.put<Categoria>(`${this.baseUrl}/${categoria.codigo}`,
       JSON.stringify(categoria), {headers}).map(response => response);
   }
 
-  // https://solufix.herokuapp.com/categorias
+  // https://solufix-api.herokuapp.com/categorias
   listarTodos(categoriaFilter: CategoriaFilter): Observable<any> {
     let params = new HttpParams();
 
@@ -41,17 +41,17 @@ export class CategoriaService {
     if (categoriaFilter.descricao) {
       params = params.append('descricao', categoriaFilter.descricao);
     }
-    return this.httpClient.get<any>(`https://solufix-api.herokuapp.com/categorias`, {params}).map(response => response);
+    return this.httpClient.get<any>(`${this.baseUrl}`, {params}).map(response => response);
   }
 
-  // https://solufix.herokuapp.com/categorias/
+  // https://solufix-api.herokuapp.com/categorias
   excluir(codigo: number): Observable<any> {
-    return this.httpClient.delete(`https://solufix-api.herokuapp.com/categorias/${codigo}`).map(() => null);
+    return this.httpClient.delete(`${this.baseUrl}/${codigo}`).map(() => null);
   }
 
-  // https://solufix.herokuapp.com/categorias
+  // https://solufix-api.herokuapp.com/categorias
   carregarCategorias(): Observable<any> {
-    return this.httpClient.get<any>(`https://solufix-api.herokuapp.com/categorias`).map(response => {
+    return this.httpClient.get<any>(`${this.baseUrl}`).map(response => {
       return response.content;
     });
   }

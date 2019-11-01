@@ -1,0 +1,67 @@
+<br>
+<br>
+<br>
+
+<form #f="ngForm">
+<div class="container">
+
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-12 ui-fluid">
+      <h1 style="color: red; text-align: center;">{{isEditando() == false ? 'Edição de Usuário' : 'Cadastro de Usuário'}}</h1>
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <label>Nome *</label>
+      <input type="text" pInputText name="nome" [(ngModel)]="usuario.nome" required/>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <label>E-mail *</label>
+      <input type="text" pInputText name="email" [(ngModel)]="usuario.email" required email/>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <label>Senha *</label>
+      <input type="password" pPassword name="senha" [(ngModel)]="usuario.senha" promptLabel="Digite a senha"
+        required weakLabel="Senha Fraca" mediumLabel="Senha Média" strongLabel="Senha Forte"/>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <label>Confirmar Senha *</label>
+      <input type="password" pPassword name="confirmarSenha" [(ngModel)]="senha" promptLabel="Confirme a senha"
+      required weakLabel="Senha Fraca" mediumLabel="Senha Média" strongLabel="Senha Forte"/>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="ui-g-12 ui-md-12 ui-fluid">
+      <label>Permissões *</label>
+          <p-multiSelect [options]="permissoes" [(ngModel)]="usuario.permissoes" required
+              [panelStyle]="{minWidth:'12em'}" name="permissaoUsuario" defaultLabel="Selecione..."
+              selectedItemsLabel="{0} itens selecionados" emptyFilterMessage="Nenhum item encontrado">
+              <ng-template let-value pTemplate="selectedItems">
+                <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
+                    <img src="assets/layout/images/special/sec.jpg" style="width:20px;vertical-align:middle;margin-right:.5em" />
+                    <span>{{val.descricao}}</span>
+                </div>
+                <span *ngIf="!value || value.length === 0" class="ui-multiselected-empty-token ui-corner-all">Selecione...</span>
+            </ng-template>
+            <ng-template let-permissao pTemplate="item">
+                <img src="assets/layout/images/special/sec.jpg" style="width:24px;display:inline-block;vertical-align:middle"/>
+                <div style="font-size:14px;float:right;margin-top:4px;text-align: center;">{{permissao.label}}</div>
+            </ng-template>
+        </p-multiSelect>
+        </div>
+
+    <div class="ui-g-12 ui-md-2 ui-fluid">
+        <button pButton type="submit" label="Salvar" style="background-color: green;"
+          icon="pi pi-save" (click)="prepararSalvar(f)" [disabled]="!f.valid"></button>
+    </div>
+    <div class="ui-g-12 ui-md-2 ui-fluid">
+      <a routerLink="/usuario">Listar usuários</a>
+    </div>
+
+
+  </div>
+
+  </div>
+
+</form>

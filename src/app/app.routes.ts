@@ -1,3 +1,6 @@
+import { UsuarioPesquisaComponent } from './usuario/usuario-pesquisa/usuario-pesquisa.component';
+import { UsuarioCadastroComponent } from './usuario/usuario-cadastro/usuario-cadastro.component';
+import { MenuInicialComponent } from './menu/menu-inicial/menu-inicial.component';
 import { PaginaNaoEncontradaComponent } from './seguranca/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { GuardGuard } from './seguranca/guard.guard';
 import {Routes, RouterModule} from '@angular/router';
@@ -21,6 +24,15 @@ export const routes: Routes = [
     canActivate: [GuardGuard], data: {roles: ['ROLE_PESQUISAR_PRODUTO']}},
   {path: 'produto/:codigo', component: ProdutoCadastroComponent,
     canActivate: [GuardGuard], data: {roles: ['ROLE_CADASTRAR_PRODUTO']}},
+
+  {path: 'inicio', component: MenuInicialComponent},
+
+  {path: 'usuario-novo', component: UsuarioCadastroComponent, canActivate: [GuardGuard],
+    data: {roles: ['ROLE_CADASTRAR_USUARIO']}},
+  {path: 'usuario', component: UsuarioPesquisaComponent, canActivate: [GuardGuard],
+    data: {roles: ['ROLE_PESQUISAR_USUARIO']}},
+  {path: 'usuario-novo/:codigo', component: UsuarioCadastroComponent, canActivate: [GuardGuard],
+    data: {roles: ['ROLE_CADASTRAR_USUARIO']}},
 
   {path: 'nao-autorizado', component: NaoAutorizadoComponent},
   {path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent},
