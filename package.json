@@ -23,7 +23,7 @@
     "@angular/router": "~8.2.9",
     "@auth0/angular-jwt": "^3.0.0",
     "@fullcalendar/core": "^4.3.1",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "core-js": "^3.2.1",
     "ng2-currency-mask": "^5.3.1",
     "primeicons": "^2.0.0",
